@@ -14,25 +14,25 @@ class _HomePageState extends State<HomePage> {
     _scrSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          _backgroundImage(),
-          _cardProfile(),
-          _body(),
-        ],
-      ),
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.symmetric(vertical: 10.0),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black,
-              blurRadius: 10.0,
-              offset: Offset(0, 8),
-            )
-          ]
+        body: Stack(
+          children: <Widget>[
+            _backgroundImage(),
+            _cardProfile(),
+            _body(),
+          ],
         ),
+        bottomNavigationBar: _bottomNavBar());
+  }
+
+  Widget _bottomNavBar() => Container(
+        padding: EdgeInsets.symmetric(vertical: 10.0),
+        decoration: BoxDecoration(color: Colors.white, boxShadow: [
+          BoxShadow(
+            color: Colors.black,
+            blurRadius: 10.0,
+            offset: Offset(0, 8),
+          )
+        ]),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
@@ -65,9 +65,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-      ),
-    );
-  }
+      );
 
   Widget _backgroundImage() {
     return Image.asset(
@@ -79,7 +77,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _body() {
-    final marginTop = _scrSize.height * 0.40;
+    final marginTop = _scrSize.height * 0.45;
 
     return Container(
       margin: EdgeInsets.only(top: marginTop),
