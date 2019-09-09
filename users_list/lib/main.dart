@@ -24,7 +24,16 @@ class MainApp extends StatelessWidget {
             borderSide: BorderSide(color: Colors.greenAccent[400], width: 1.5),
             borderRadius: BorderRadius.circular(30),
           ),
-          
+          errorBorder: OutlineInputBorder(
+            gapPadding: 5,
+            borderSide: BorderSide(color: Colors.red, width: 0.5),
+            borderRadius: BorderRadius.circular(30),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            gapPadding: 5,
+            borderSide: BorderSide(color: Colors.red, width: 1.5),
+            borderRadius: BorderRadius.circular(30),
+          ),
         ),
       ),
       debugShowCheckedModeBanner: false,

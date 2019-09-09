@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                   ButtonRounded(
                     background: Colors.greenAccent[400],
                     icon: Icons.add,
-                    onTap: _addUser,
+                    onTap: _showAlertAddUser,
                   )
                 ],
               ),
@@ -105,12 +105,18 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _addUser() {
+  void _showAlertAddUser() {
     showDialog(
       context: con,
       builder: (context) {
-        return AlertDialogUser();
+        return AlertDialogUser(callback: _addUserToList);
       },
     );
+  }
+
+  void _addUserToList(UserModel user) {
+    setState(() {
+      users.add(user);
+    });
   }
 }
