@@ -71,12 +71,12 @@ class _HomePageState extends State<HomePage> {
     return ListView.builder(
       itemCount: users.length,
       itemBuilder: (context, index) {
-        return _userItem(users[index]);
+        return _userItem(users[index], index);
       },
     );
   }
 
-  Widget _userItem(UserModel user) {
+  Widget _userItem(UserModel user, int index) {
     final date = '${user.date.year}-${user.date.month}-${user.date.day}';
 
     final title = Row(
@@ -94,10 +94,47 @@ class _HomePageState extends State<HomePage> {
       ],
     );
 
+    final actions = Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Text(date),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            InkWell(
+              onTap: () {
+                _showAlertUpdateUser(user, index);
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Icon(
+                  Icons.update,
+                  color: Colors.orange,
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                _deleteUser(index);
+              },
+              splashColor: Colors.red[400],
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Icon(
+                  Icons.delete,
+                  color: Colors.red,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+
     return ListTile(
       title: title,
       subtitle: Text(user.occupation),
-      trailing: Text(date),
+      trailing: actions,
       leading: CircleAvatar(
         backgroundColor: Colors.blue,
         child: Text(user.name.substring(0, 1)),
@@ -118,5 +155,30 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       users.add(user);
     });
+  }
+
+  void _updateUser(user, index) {
+    setState(() {
+      users[index] = user;
+    });
+  }
+
+  void _deleteUser(int index) {
+    setState(() {
+      users.removeAt(index);
+    });
+  }
+
+  void _showAlertUpdateUser(user, index) {
+    showDialog(
+      context: con,
+      builder: (context) {
+        return AlertDialogUser(
+          callback: _updateUser,
+          user: user,
+          index: index,
+        );
+      },
+    );
   }
 }
