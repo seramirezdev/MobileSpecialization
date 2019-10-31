@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maps_flutter/src/core/services/local_storage_service.dart';
+import 'package:maps_flutter/src/core/services/navigation_service.dart';
 import 'package:maps_flutter/src/routes.dart';
 
 const titleApp = "Maps Flutter";
@@ -12,9 +13,8 @@ class MapsFlutter extends StatelessWidget {
     return FutureBuilder<LocalStorageService>(
       future: LocalStorageService.getInstance(),
       builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return Center(child: CircularProgressIndicator());
-        }
+
+        if (!snapshot.hasData) return Center(child: CircularProgressIndicator());
 
         final route = snapshot.data.isLogged ? Routes.main : Routes.login;
 
@@ -22,9 +22,10 @@ class MapsFlutter extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: titleApp,
           initialRoute: route,
+          navigatorKey: navigationService.navigatorKey,
           onGenerateRoute: Routes.generateRoute,
         );
-      },
+      }
     );
   }
 }

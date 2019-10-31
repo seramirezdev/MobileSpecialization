@@ -13,6 +13,7 @@ class Routes {
       case maps:
         return MaterialPageRoute(builder: (context) => MapsPage());
       case main:
+        String args = settings.arguments;
         return MaterialPageRoute(builder: (context) => MainPage());
       case login:
         return MaterialPageRoute(builder: (context) => LoginPage());
