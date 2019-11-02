@@ -33,11 +33,8 @@ class HomePage extends StatelessWidget {
   }
 
   void _saveUser() async {
-    DocumentReference userCreated = await usersRef.add({
-      "name": "Prueba",
-      "email": "prueba@gmail",
-      "phone": 3221568452
-    });
+    DocumentReference userCreated = await usersRef
+        .add({"name": "Prueba", "email": "prueba@gmail", "phone": 3221568452});
     userCreated.updateData({"id": userCreated.documentID});
     userCreated.delete();
   }
